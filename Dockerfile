@@ -1,7 +1,7 @@
 FROM java:8
 VOLUME /tmp
 RUN mkdir /app
-ADD target/staticmarriage-0.0.1-SNAPSHOT.jar /app/app.jar
+ADD target/staticmarriage-web-0.0.1-SNAPSHOT.jar /app/app.jar
 ADD runboot.sh /app
 RUN bash -c 'touch /app/app.jar'
 WORKDIR /app
