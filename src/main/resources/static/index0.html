@@ -22,17 +22,9 @@
                 <div>价格：{{book.price}}</div>
                 <div>库存：{{book.storage}}</div>
                 <hr>
-                <div ng-if="isadmin"><a ng-href="#!/edit/{{book.id}}" class="btn btn-info btn-block">修改</a></div>
-                <div ng-if="isadmin"><button class="btn btn-danger btn-block" ng-click="remove(book)">删除</button> </div>
                 <button ng-if="!isadmin" class="btn btn-primary btn-block" ng-click="add(book,1)">加入购物车<i class="icon-shopping-cart"></i></button>
                 <button ng-if="!isadmin" class="btn btn-default btn-block" ng-click="buy(book,1)">立刻购买</button>
             </div>
         </div>
     </div>
-</div>
-<div class="col-md-12">
-    <ul class="pager">
-        <li class="previous"><a href="javascript:void(0)"><i class="icon-chevron-left"></i></a> </li>
-        <li class="next"><a href="javascript:void(0)"><i class="icon-chevron-right"></i></a> </li>
-    </ul>
 </div>

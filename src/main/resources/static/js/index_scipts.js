@@ -24,7 +24,7 @@ app.config(['$routeProvider','$locationProvider',function ($routeProvider, $loca
     $routeProvider
         .when('/',{
             controller:"IndexController",
-            templateUrl:"index0.html"
+            templateUrl:"index1.html"
         })
         .when('/add',{
             controller:"AddController",
@@ -33,46 +33,6 @@ app.config(['$routeProvider','$locationProvider',function ($routeProvider, $loca
         .when('/view/:id',{
             controller:"DetailController",
             templateUrl:"detail.html"
-        })
-        .when('/edit/:id',{
-            controller:'EditController',
-            templateUrl:"edit.html"
-        })
-        .when('/cart',{
-            controller:"CartController",
-            templateUrl:"cart.html"
-        })
-        .when('/user',{
-            controller:"UserController",
-            templateUrl:"user.html"
-        })
-        .when('/order',{
-            controller:"OrderController",
-            templateUrl:"order.html"
-        })
-        .when('/user_edit',{
-            controller:"UserEditController",
-            templateUrl:"user_edit.html"
-        })
-        .when('/userEdit/:id',{
-            controller:"UserEditIdController",
-            templateUrl:"user_editid.html"
-        })
-        .when('/management',{
-            controller:"ManagementController",
-            templateUrl:"management.html"
-        })
-        .when('/statistics',{
-            controller:"StatisticsController",
-            templateUrl:"statistics.html"
-        })
-        .when('/addUser',{
-            controller:"AddUserController",
-            templateUrl:"addUser.html"
-        })
-        .when('/userEdit/:id',{
-            controller:"UserEditIdController",
-            templateUrl:"user_editid.html"
         })
         .otherwise({redirectTo:"/"});
 }]);
@@ -143,37 +103,36 @@ app.controller("MainController",['$route','$location','$routeParams',
 }]);
 
 app.controller("IndexController",["$scope","$routeParams","$rootScope",function ($scope,$routeParams,$rootScope) {
-    $.post("/isadmin",null,function(data){
-        $rootScope.$apply(function () {
-            $rootScope.isadmin=data;
-        })
-    });
-    $.post("/books",null,function (data, statusText) {
-        console.log(data);
-        $scope.$apply(function () {
-            $scope.booklist=data;
-        });
-    });
-    $scope.search=function (query) {
-        $.post("/search",{
-            "query":query
+    $scope.init=function (n, m) {
+        $.post("/init",{
+            "n" : n,
+            "m" : m
         },function (data) {
             $scope.$apply(function () {
-                $scope.booklist=data;
+                $scope.men=data.men;
+                $scope.women=data.women;
             })
         });
     };
-    $scope.add=add;
-    $scope.buy=buy;
-    $scope.remove=function(book){
-        $.post("/removebook",{
-            "id":book.id
-        },function(){
-            alert("删除成功！");
-            window.location.reload(true);
-        });
-        window.location.reload(true);
-    };
+    $scope.process=function(){
+        $.post("/process",null,
+            function(data){
+                $scope.$apply(function () {
+                    $scope.men=data.men;
+                    $scope.women=data.women;
+                })
+
+            })
+    }
+    $scope.proove=function(){
+        $.post("/proove",null,
+            function(data){
+                $scope.$apply(function () {
+                    alert(data);
+                })
+
+            })
+    }
 }]);
 
 app.controller("AddController",[
