@@ -13,27 +13,53 @@
         </div>
     </div>
     <br>
+    <div class="row">
+        <div ng-repeat="man in men" class="col-sm-3">
+            <div class="img-thumbnail" style="opacity: 0.6">
+                <br>
+                <div align="center"> <b>{{ man.id }} 号男生 </b> </div>
+                <br>
+                <div>心仪列表：</div>
+                <div align="center" style="word-break: break-all">{{ man.peer }}</div>
+                <br>
+                <div>牵手对象：</div>
+                <div ng-if="man.lover_id != -1" align="center">{{ man.lover_id }} 号女生</div>
+                <div ng-if="man.lover_id == -1" align="center">小哥哥暂时木有对象哦~</div>
+                <br>
+            </div>
+            <br>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div ng-repeat="man in women" class="col-sm-3">
+            <div class="img-thumbnail" style="opacity: 0.6">
+                <br>
+                <div align="center"> <b>{{ man.id }} 号女生 </b> </div>
+                <br>
+                <div>心仪列表：</div>
+                <div align="center" style="word-break: break-all">{{ man.peer }}</div>
+                <br>
+                <div>牵手对象：</div>
+                <div ng-if="man.lover_id != -1" align="center">{{ man.lover_id }} 号男生</div>
+                <div ng-if="man.lover_id == -1" align="center">小姐姐暂时木有对象哦~</div>
+                <br>
+            </div>
+            <br>
+        </div>
+    </div>
     <div class="form-group">
-        <div class="col-sm-offset-6 col-sm-3">
+        <div class="col-sm-3" align="center">
             <button type="submit" class="btn btn-primary" ng-click="init(n,m)" >开始</button>
         </div>
-        <div class="col-sm-offset-6 col-sm-3">
+        <div class="col-sm-3" align="center">
             <button type="submit" class="btn btn-primary" ng-click="process()" >处理</button>
         </div>
-        <div class="col-sm-offset-6 col-sm-3">
+        <div class="col-sm-3" align="center">
+            <button type="submit" class="btn btn-primary" ng-click="finish()" >完成</button>
+        </div>
+        <div class="col-sm-3" align="center">
             <button type="submit" class="btn btn-primary" ng-click="proove()" >验证</button>
         </div>
-    </div>
-    <div>man:</div>
-    <div ng-repeat="man in men">
-        <div>id : {{ man.id }}</div>
-        <div>peer: {{ man.peer }}</div>
-        <div>lover: {{ man.lover_id }}</div>
-    </div>
-    <div>woman:</div>
-    <div ng-repeat="man in women">
-        <div>id : {{ man.id }}</div>
-        <div>peer: {{ man.peer }}</div>
-        <div>lover: {{ man.lover_id }}</div>
     </div>
 </form>

@@ -5,6 +5,7 @@ import cn.pipipan.staticmarriage.staticmarriageweb.Domain.PackageHuman;
 import cn.pipipan.staticmarriage.staticmarriageweb.Service.MarriageService;
 import com.pipipan.staticmarriage.App;
 import com.pipipan.staticmarriage.Human;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,14 @@ public class MarriageController {
         HttpSession session = request.getSession();
         App app = (App)session.getAttribute("app");
         return marriageService.proove(app);
+    }
+
+    @RequestMapping("/finish")
+    public PackageHuman finish(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        App app = (App)session.getAttribute("app");
+        marriageService.finish(app);
+        return new PackageHuman(packageCastHuman(app.getMen()), packageCastHuman(app.getWomen()));
     }
     private CastHuman[] packageCastHuman(Human[] men){
         CastHuman[] castHumen = new CastHuman[men.length];
